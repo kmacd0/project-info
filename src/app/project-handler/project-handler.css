@@ -1,0 +1,21 @@
+:host {
+    display: flex;
+    align-items: flex-start;
+}
+
+.project-info-container {
+    border-right: 2px solid black;
+    padding-right: 3rem;
+}
+
+th,
+td {
+    border-right: 1px solid black;
+    padding: 0 10px;
+    text-align: left;
+}
+
+th:last-child,
+td:last-child {
+    border-right: none;
+}

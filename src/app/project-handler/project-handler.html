@@ -1,0 +1,84 @@
+<div class="project-info-container">
+    <h2>Project Info</h2>
+
+    <form [formGroup]="progressNotesForm" (ngSubmit)="onSubmit()">
+        <div>
+            <label for="project-code">Project Code: </label>
+            <input id="project-code" type="text" formControlName="projectCode" (blur)="updateProjectName()" />
+            @if (projectCodeNotFound) {
+            <p style="color: red">Project code not found.</p>
+            }
+        </div>
+        <div>
+            <label for="project-name">Project Name: </label>
+            <input id="project-name" type="text" formControlName="projectName" />
+        </div>
+
+        <div>
+            <label for="project-date">Due Date: </label>
+            <input id="project-due-date" type="date" formControlName="projectDueDate" />
+        </div>
+
+        <div>
+            <label for="project-status">Status: </label>
+            <input id="project-status" type="text" formControlName="projectStatus" />
+        </div>
+
+        <div formGroupName="projectDetails">
+            <h3>Project Notes</h3>
+
+            <div>
+                <label for="project-member">Member: </label>
+                <input id="project-member" type="text" formControlName="projectMember" />
+            </div>
+
+            <div>
+                <label for="project-note">Notes: </label>
+                <input id="project-note" type="text" formControlName="projectNote" />
+            </div>
+        </div>
+
+        <br>
+
+        <button type="submit">Create Project</button>
+    </form>
+</div>
+
+<div>
+    <table>
+        <thead>
+            <tr>
+                @for (col of displayedColumns; track col) {
+                <th>{{ col }}</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @for (project of createdProjects; track project._id || $index) {
+            <tr>
+                <td>
+                    <input type="text" [(ngModel)]="project.projectCode" (change)="saveProjectUpdate(project)" />
+                </td>
+                <td>
+                    <input type="text" [(ngModel)]="project.projectName" (change)="saveProjectUpdate(project)" />
+                </td>
+                <td>
+                    <input type="date" [(ngModel)]="project.projectDueDate" (change)="saveProjectUpdate(project)" />
+                </td>
+                <td>
+                    <input type="text" [(ngModel)]="project.projectStatus" (change)="saveProjectUpdate(project)" />
+                </td>
+                <td>
+                    <input type="text" [(ngModel)]="project.projectMember" (change)="saveProjectUpdate(project)" />
+                </td>
+                <td>
+                    <input type="text" [(ngModel)]="project.projectNote" (change)="saveProjectUpdate(project)" />
+                </td>
+                <td>
+                    <button type="button" (click)="deleteProject($index)">X</button>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
